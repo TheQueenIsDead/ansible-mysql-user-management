@@ -3,6 +3,14 @@
 This repos holds configuration as code config and playbook files for configuring mysql
 credentials for users and services.
 
+Tested with the following versions of software
+
+|Software       |Version    |
+|---------------|-----------|
+|Docker         | 18.09.7   |
+|Docker Compose | 1.17.1    |
+|Ansible        | 2.9.2     |
+
 ## Todo
 
 - Add in the same configuration for services, and test (Per host config).
