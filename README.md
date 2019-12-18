@@ -91,3 +91,11 @@ mysql> select distinct grantee from information_schema.user_privileges;
 REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'duffyboy'@'localhost';
 DROP USER 'duffyboy'@'localhost';
 ```
+
+On newer versions,
+```bash
+apt install default-libmysqlclient-dev
+pip install MySQL-python
+```
+
+ansible 2.5.1.
