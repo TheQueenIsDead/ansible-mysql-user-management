@@ -69,6 +69,7 @@ p: example
 
 ### Grants
 
+```bash
 mysql> select distinct grantee from information_schema.user_privileges;
 +--------------------------------+
 | grantee                        |
@@ -83,7 +84,10 @@ mysql> select distinct grantee from information_schema.user_privileges;
 | 'root'@'%'                     |
 +--------------------------------+
 8 rows in set (0.00 sec)
+```
 
 ### Revoke and drop a user
+```bash
 REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'duffyboy'@'localhost';
 DROP USER 'duffyboy'@'localhost';
+```
