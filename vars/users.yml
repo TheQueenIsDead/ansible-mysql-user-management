@@ -1,0 +1,13 @@
+---
+users:
+  dking:
+    environments:
+      - testing
+      - staging
+      - production
+  dgilroy:
+    environments:
+      - testing
+      - staging
+  duffyboy:
+    environments: ~

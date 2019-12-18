@@ -1,0 +1,12 @@
+[all:vars]
+ansible_connection=docker
+ansible_become=false
+
+[testing]
+mysql-testing ansible_host=mysql-testing
+
+[staging]
+mysql-staging ansible_host=mysql-staging
+
+[production]
+mysql-production ansible_host=mysql-production

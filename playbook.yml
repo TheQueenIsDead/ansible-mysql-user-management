@@ -1,0 +1,41 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+
+    - name: Load user account information
+      include_vars:
+        file: "users.yml"
+        name: mysql_users
+
+    - name: Debug the users file
+      debug:
+        msg: "User {{ item.key }} is allowed {{ item.value }}"
+      with_dict:
+        - "{{ mysql_users.users }}"
+      delegate_to: localhost
+
+    - name: Debug the users enviornments
+      debug:
+        msg: "{{ item.value.environments }}"
+      with_dict:
+        - "{{ mysql_users.users }}"
+      delegate_to: localhost
+
+    - name: Debug the current limit
+      debug:
+        var: ansible_limit
+
+    - name: Ensure the user has an account if they have priveleges for the env
+      include_tasks:
+        file: "tasks/create_mysql_user.yml"
+      vars:
+        username: "{{ item.key }}"
+        password: "hardcodeddemo"
+      when: item.value.environments and 'ansible_limit in item.value.environments'
+      with_dict:
+        - "{{ mysql_users.users }}"
+
+
+
+

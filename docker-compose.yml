@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  testing: &testing
+    image: mysql
+    container_name: mysql-testing
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_ROOT_PASSWORD=example
+
+  staging:
+    <<: *testing
+    container_name: mysql-staging
+
+  production:
+    <<: *testing
+    container_name: mysql-production
