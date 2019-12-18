@@ -22,7 +22,7 @@
         - "{{ mysql_users.users }}"
       delegate_to: localhost
 
-    - name: Debug the current limit
+    - name: Debug the current limit.
       debug:
         var: ansible_limit
 
@@ -32,7 +32,9 @@
       vars:
         username: "{{ item.key }}"
         password: "hardcodeddemo"
-      when: item.value.environments and 'ansible_limit in item.value.environments'
+#        username: "{{ ansible_limit }}"
+#        password: "{{ item.value.environments }}"
+      when: 'item.value.environments and ansible_limit in item.value.environments'
       with_dict:
         - "{{ mysql_users.users }}"
 

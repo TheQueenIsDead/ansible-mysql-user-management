@@ -3,6 +3,7 @@
     var: username
 - debug:
     var: password
+
 - name: Create database user with password and all database privileges and 'WITH GRANT OPTION'
   mysql_user:
     login_user: root
