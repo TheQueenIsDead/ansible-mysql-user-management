@@ -1,0 +1,30 @@
+---
+- debug:
+    var: username
+- debug:
+    var: password
+- debug:
+    var: user_state
+
+- name: Load user password credentials based on username
+  include_vars:
+    file: "vars/passwords/{{ username }}"
+    name: user_credentials
+
+- debug:
+    var: user_credentials
+
+- debug:
+    msg: "This is my devel: {{ user_credentials[ansible_limit] }}, for the environment {{ ansible_limit }}"
+
+- debug:
+    msg: "{{ user_state }} so {{ 'present' if user_state == True else 'absent' }}"
+
+- name: Create database user with password and all database privileges and 'WITH GRANT OPTION'
+  mysql_user:
+    login_user: root
+    login_password: example
+    name: "{{ username }}"
+    password: "{{ user_credentials[ansible_limit] }}"
+    priv: '*.*:ALL,GRANT'
+    state: "{{ 'present' if user_state == True else 'absent' }}"

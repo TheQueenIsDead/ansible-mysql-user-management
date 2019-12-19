@@ -28,16 +28,14 @@
 
     - name: Ensure the user has an account if they have priveleges for the env
       include_tasks:
-        file: "tasks/create_mysql_user.yml"
+        file: "tasks/mysql_user.yml"
       vars:
         username: "{{ item.key }}"
         password: "hardcodeddemo"
-#        username: "{{ ansible_limit }}"
-#        password: "{{ item.value.environments }}"
+        user_state: "{{ item.value.present }}"
       when: 'item.value.environments and ansible_limit in item.value.environments'
       with_dict:
         - "{{ mysql_users.users }}"
-
 
 
 

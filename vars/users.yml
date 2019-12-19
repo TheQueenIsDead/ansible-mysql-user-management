@@ -1,13 +1,16 @@
 ---
 users:
   dking:
+    present: true
     environments:
       - testing
       - staging
       - production
   dgilroy:
+    present: true
     environments:
       - testing
       - staging
   duffyboy:
+    present: false
     environments: ~
