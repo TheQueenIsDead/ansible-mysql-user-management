@@ -1,30 +1,18 @@
 ---
-- debug:
-    var: username
-- debug:
-    var: password
-- debug:
-    var: user_state
+- name: Debug the user name and state as well as the given limit / environment.
+  debug:
+    msg: "{{ user_name }} has user state of {{ user_state }} so ensuring {{ 'present' if user_state == True else 'absent' }} in {{ ansible_limit }}"
 
 - name: Load user password credentials based on username
   include_vars:
-    file: "vars/passwords/{{ username }}"
+    file: "vars/passwords/{{ user_name }}"
     name: user_credentials
-
-- debug:
-    var: user_credentials
-
-- debug:
-    msg: "This is my devel: {{ user_credentials[ansible_limit] }}, for the environment {{ ansible_limit }}"
-
-- debug:
-    msg: "{{ user_state }} so {{ 'present' if user_state == True else 'absent' }}"
 
 - name: Create database user with password and all database privileges and 'WITH GRANT OPTION'
   mysql_user:
-    login_user: root
-    login_password: example
-    name: "{{ username }}"
+    login_user: "{{ mysql_admin_user }}"
+    login_password: "{{ mysql_admin_pass }}"
+    name: "{{ user_name }}"
     password: "{{ user_credentials[ansible_limit] }}"
     priv: '*.*:ALL,GRANT'
     state: "{{ 'present' if user_state == True else 'absent' }}"

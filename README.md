@@ -31,6 +31,18 @@ Running the playbook for a specific `-l` of an environment (for example, `-l tes
 As of current, users can not be given explicit hosts to join. This may be rectified with the use of groups, but it not
 yet implemented.
 
+### Removing users.
+
+As each user is removed using the same details used to create the user, these must be available
+in order for the ansible module to identify which user to ensure is absent.
+
+In the case of my demo, I originally had no credentials for dufyfboy. This presented errors
+when trying to ensure he was not part of the grants, as he had no existent password.
+
+This situation I tried to accomodate for is ultimately useless, the workflow for users needing
+to be removed from the system implies they were created initially. Hence I have added duffyboy creds.
+ 
+
 ## Pre-requesites
 
 The host requires a MySQL python module installed, which can be done with the following command
